@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nana's Sunshine Coast Adventure</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Lato:wght@300;400;700&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ocean: #1a6b8a;
+    --ocean-light: #2a8aad;
+    --ocean-deep: #0d4a63;
+    --sand: #f5e6c8;
+    --sand-dark: #e8d4a8;
+    --coral: #e8714a;
+    --coral-light: #f28c68;
+    --green: #3d7a4f;
+    --green-light: #5a9e6f;
+    --gold: #c9952a;
+    --gold-light: #e8b84b;
+    --cream: #fdf8f0;
+    --dark: #1c2b1e;
+    --text: #2c3e2d;
+    --purple: #7b5ea7;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Lato',sans-serif; background:var(--cream); color:var(--text); overflow-x:hidden; }
+
+  /* HERO */
+  .hero {
+    position:relative; height:100vh; min-height:600px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    overflow:hidden; text-align:center;
+    background:linear-gradient(160deg,#0d3b52 0%,#1a6b8a 35%,#2a9d8f 65%,#52b788 100%);
+  }
+  .hero-sun {
+    position:absolute; top:60px; right:80px; width:120px; height:120px;
+    background:radial-gradient(circle,#ffd166 30%,#f4a261 70%,transparent 100%);
+    border-radius:50%; box-shadow:0 0 60px 20px rgba(255,209,102,0.3);
+    animation:sunPulse 4s ease-in-out infinite;
+  }
+  @keyframes sunPulse { 0%,100%{box-shadow:0 0 60px 20px rgba(255,209,102,0.3);} 50%{box-shadow:0 0 90px 35px rgba(255,209,102,0.5);} }
+  .hero-birds { position:absolute; top:100px; left:60px; font-size:1.6rem; opacity:0.5; animation:floatBirds 6s ease-in-out infinite; }
+  @keyframes floatBirds { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-12px);} }
+  .hero-waves { position:absolute; bottom:0; left:0; right:0; height:180px; overflow:hidden; }
+  .wave { position:absolute; bottom:0; left:-100%; width:300%; height:100%; border-radius:40% 60% 40% 60%/30% 30% 70% 70%; }
+  .wave1 { background:rgba(255,255,255,0.07); animation:wave 8s linear infinite; }
+  .wave2 { background:rgba(255,255,255,0.05); animation:wave 12s linear infinite reverse; bottom:15px; }
+  .wave3 { background:rgba(255,255,255,0.04); animation:wave 16s linear infinite; bottom:30px; }
+  @keyframes wave { from{transform:translateX(0) rotate(0deg);} to{transform:translateX(33.33%) rotate(2deg);} }
+  .hero-content { position:relative; z-index:2; padding:2rem; }
+  .hero-eyebrow { font-family:'Dancing Script',cursive; font-size:clamp(1.2rem,3vw,1.8rem); color:var(--sand); letter-spacing:2px; margin-bottom:0.5rem; opacity:0; animation:fadeUp 1s ease forwards 0.3s; }
+  .hero-title { font-family:'Playfair Display',serif; font-size:clamp(3rem,8vw,6.5rem); font-weight:900; color:#fff; line-height:1.05; text-shadow:0 4px 30px rgba(0,0,0,0.3); opacity:0; animation:fadeUp 1s ease forwards 0.6s; }
+  .hero-title span { color:#ffd166; font-style:italic; }
+  .hero-subtitle { font-size:clamp(0.85rem,2vw,1.1rem); font-weight:300; color:rgba(255,255,255,0.85); letter-spacing:4px; text-transform:uppercase; margin-top:1rem; opacity:0; animation:fadeUp 1s ease forwards 0.9s; }
+  .hero-dates { margin-top:2rem; display:inline-block; background:rgba(255,255,255,0.15); backdrop-filter:blur(10px); border:1px solid rgba(255,255,255,0.3); padding:0.75rem 2.5rem; border-radius:50px; font-size:1rem; color:#fff; letter-spacing:3px; opacity:0; animation:fadeUp 1s ease forwards 1.2s; }
+  .hero-scroll { position:absolute; bottom:2.5rem; left:50%; transform:translateX(-50%); z-index:2; display:flex; flex-direction:column; align-items:center; gap:0.5rem; color:rgba(255,255,255,0.6); font-size:0.65rem; letter-spacing:3px; text-transform:uppercase; opacity:0; animation:fadeUp 1s ease forwards 1.5s; }
+  .scroll-line { width:1px; height:40px; background:linear-gradient(to bottom,rgba(255,255,255,0.6),transparent); animation:scrollPulse 2s ease-in-out infinite; }
+  @keyframes scrollPulse { 0%,100%{opacity:0.3;} 50%{opacity:1;} }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(30px);} to{opacity:1;transform:translateY(0);} }
+
+  /* INTRO */
+  .intro { max-width:700px; margin:0 auto; padding:5rem 2rem 2rem; text-align:center; }
+  .intro-script { font-family:'Dancing Script',cursive; font-size:2.2rem; color:var(--coral); margin-bottom:1rem; }
+  .intro-text { font-size:1.05rem; line-height:1.9; color:#5a6a5b; font-weight:300; }
+  .divider { width:60px; height:3px; background:linear-gradient(90deg,var(--coral),var(--gold)); margin:2rem auto; border-radius:2px; }
+
+  /* SCENIC STRIP */
+  .scenic-strip { display:flex; height:150px; }
+  .scene { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; font-size:2.8rem; transition:flex 0.5s ease; cursor:default; position:relative; overflow:hidden; }
+  .scene:hover { flex:2.5; }
+  .scene-label { font-family:'Lato',sans-serif; font-size:0.6rem; letter-spacing:2px; text-transform:uppercase; margin-top:0.4rem; font-weight:700; opacity:0; transition:opacity 0.3s ease; }
+  .scene:hover .scene-label { opacity:1; }
+  .scene-beach  { background:linear-gradient(180deg,#87ceeb 0%,#87ceeb 50%,#f5e6c8 50%,#f5e6c8 75%,#2a9d8f 75%); }
+  .scene-beach .scene-label { color:var(--ocean-deep); }
+  .scene-hinter { background:linear-gradient(180deg,#87ceeb 0%,#87ceeb 40%,#3d7a4f 40%,#52b788 70%,#2d5a3d 100%); }
+  .scene-hinter .scene-label { color:#fff; }
+  .scene-wildlife { background:linear-gradient(180deg,#87ceeb 0%,#87ceeb 45%,#8b6914 45%,#c8a84b 70%,#5a8a3d 100%); }
+  .scene-wildlife .scene-label { color:#fff; }
+  .scene-city { background:linear-gradient(180deg,#1a1a2e 0%,#16213e 40%,#0f3460 60%,#1a6b8a 100%); }
+  .scene-city .scene-label { color:var(--sand); }
+  .scene-market { background:linear-gradient(180deg,#ffd166 0%,#f4a261 40%,#e76f51 70%,#c05e3a 100%); }
+  .scene-market .scene-label { color:#fff; }
+
+  /* LEGEND */
+  .legend-section { background:var(--dark); padding:3rem 2rem; text-align:center; }
+  .legend-title { font-family:'Dancing Script',cursive; font-size:1.6rem; color:var(--sand); margin-bottom:1.5rem; }
+  .legend-pills { display:flex; flex-wrap:wrap; justify-content:center; gap:1rem; }
+  .pill { padding:0.5rem 1.25rem; border-radius:50px; font-size:0.8rem; font-weight:700; letter-spacing:1px; text-transform:uppercase; }
+  .pill-family  { background:var(--ocean);  color:#fff; }
+  .pill-girls   { background:var(--coral);  color:#fff; }
+  .pill-jn      { background:var(--green);  color:#fff; }
+  .pill-evening { background:var(--gold);   color:#fff; }
+
+  /* WEEK HEADER */
+  .week-header { position:relative; height:220px; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .week-header.w1 { background:linear-gradient(135deg,#0d4a63,#1a6b8a,#2a9d8f); }
+  .week-header.w2 { background:linear-gradient(135deg,#2d5a3d,#3d7a4f,#52b788); }
+  .week-header::before { content:''; position:absolute; inset:0; background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
+  .week-header-content { position:relative; z-index:2; text-align:center; }
+  .week-label { font-family:'Dancing Script',cursive; font-size:1.2rem; color:rgba(255,255,255,0.7); letter-spacing:3px; }
+  .week-title { font-family:'Playfair Display',serif; font-size:clamp(2.2rem,6vw,4rem); font-weight:900; color:#fff; text-shadow:0 4px 20px rgba(0,0,0,0.3); }
+  .week-emoji { font-size:2rem; margin-top:0.5rem; }
+
+  /* DAY CARDS */
+  .days-container { max-width:1100px; margin:0 auto; padding:3rem 1.5rem; display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:1.5rem; }
+  .day-card { background:#fff; border-radius:20px; overflow:hidden; box-shadow:0 4px 24px rgba(0,0,0,0.07); transition:transform 0.3s ease,box-shadow 0.3s ease; position:relative; }
+  .day-card:hover { transform:translateY(-8px); box-shadow:0 16px 48px rgba(0,0,0,0.13); }
+  .card-art { width:100%; height:160px; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
+  .card-art-emoji { font-size:4rem; position:relative; z-index:2; filter:drop-shadow(0 4px 8px rgba(0,0,0,0.2)); transition:transform 0.3s ease; }
+  .day-card:hover .card-art-emoji { transform:scale(1.15); }
+  .card-art::after { content:''; position:absolute; bottom:-1px; left:0; right:0; height:30px; background:#fff; clip-path:ellipse(55% 100% at 50% 100%); }
+
+  /* Gradient themes */
+  .art-arrival    { background:linear-gradient(135deg,#667eea,#764ba2); }
+  .art-montville  { background:linear-gradient(135deg,#3d7a4f,#52b788,#95d5b2); }
+  .art-zoo        { background:linear-gradient(135deg,#8b6914,#c8a84b,#e9c46a); }
+  .art-markets    { background:linear-gradient(135deg,#e8714a,#f4a261,#ffd166); }
+  .art-maleny     { background:linear-gradient(135deg,#2d5a3d,#3d7a4f,#74c69d); }
+  .art-noosa      { background:linear-gradient(135deg,#0d4a63,#1a6b8a,#48cae4); }
+  .art-eumundi    { background:linear-gradient(135deg,#c9952a,#e9c46a,#f4a261); }
+  .art-volunteer  { background:linear-gradient(135deg,#7b5ea7,#9d4edd,#c77dff); }
+  .art-nightmkt   { background:linear-gradient(135deg,#1a1a2e,#e8714a,#ffd166); }
+  .art-hike       { background:linear-gradient(135deg,#1b4332,#40916c,#95d5b2); }
+  .art-brisbane   { background:linear-gradient(135deg,#03045e,#0077b6,#48cae4); }
+  .art-concert    { background:linear-gradient(135deg,#1a1a2e,#e8714a,#c9952a); }
+  .art-marooch    { background:linear-gradient(135deg,#0d4a63,#2a9d8f,#52b788); }
+  .art-lastday    { background:linear-gradient(135deg,#3d7a4f,#c9952a,#e8714a); }
+  .art-farewell   { background:linear-gradient(135deg,#0d4a63,#667eea,#764ba2); }
+
+  .day-number-badge { position:absolute; top:1rem; right:1rem; width:34px; height:34px; background:rgba(255,255,255,0.9); border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'Playfair Display',serif; font-weight:900; font-size:0.85rem; color:var(--dark); box-shadow:0 2px 8px rgba(0,0,0,0.2); z-index:3; }
+  .day-card-body { padding:1.25rem 1.5rem 1.5rem; }
+  .day-date { font-size:0.75rem; font-weight:700; color:var(--ocean); letter-spacing:2px; text-transform:uppercase; margin-bottom:0.2rem; }
+  .day-name { font-family:'Playfair Display',serif; font-size:1.35rem; font-weight:900; color:var(--dark); line-height:1.2; margin-bottom:0.75rem; }
+  .day-desc { font-size:0.88rem; line-height:1.75; color:#5a6a5b; margin-bottom:1rem; }
+  .day-tags { display:flex; flex-wrap:wrap; gap:0.4rem; }
+  .tag { font-size:0.68rem; font-weight:700; letter-spacing:1px; text-transform:uppercase; padding:0.25rem 0.7rem; border-radius:20px; }
+  .tag-family  { background:#e8f4f8; color:var(--ocean); }
+  .tag-girls   { background:#fdf0eb; color:var(--coral); }
+  .tag-jn      { background:#edf7f0; color:var(--green); }
+  .tag-evening { background:#fdf5e6; color:var(--gold); }
+  .tag-church  { background:#f0edf7; color:var(--purple); }
+  .tag-work    { background:#f5f5f5; color:#888; }
+
+  /* FOOTER */
+  .footer { background:var(--dark); color:var(--sand); text-align:center; padding:5rem 2rem; position:relative; overflow:hidden; }
+  .footer::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; background:linear-gradient(90deg,var(--ocean),var(--coral),var(--gold),var(--green)); }
+  .footer-title { font-family:'Dancing Script',cursive; font-size:3.5rem; color:var(--coral-light); margin-bottom:1rem; }
+  .footer-text { font-size:1rem; font-weight:300; line-height:1.9; max-width:480px; margin:0 auto 2rem; opacity:0.8; }
+  .footer-emoji { font-size:2rem; letter-spacing:0.5rem; }
+
+  @media(max-width:600px){
+    .days-container{grid-template-columns:1fr;padding:1.5rem 1rem;}
+    .scenic-strip{height:100px;}
+    .scene{font-size:2rem;}
+    .hero-sun{width:70px;height:70px;top:30px;right:30px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-sun"></div>
+  <div class="hero-birds">🕊️ 🕊️</div>
+  <div class="hero-waves">
+    <div class="wave wave1"></div>
+    <div class="wave wave2"></div>
+    <div class="wave wave3"></div>
+  </div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Welcome to Queensland</p>
+    <h1 class="hero-title">Nana's<br><span>Sunshine Coast</span><br>Adventure</h1>
+    <p class="hero-subtitle">A family fortnight on Australia's golden coast</p>
+    <div class="hero-dates">21 May — 4 June 2026</div>
+  </div>
+  <div class="hero-scroll"><div class="scroll-line"></div>scroll</div>
+</section>
+
+<!-- INTRO -->
+<section class="intro">
+  <p class="intro-script">Two weeks of sun, surf & family</p>
+  <div class="divider"></div>
+  <p class="intro-text">From the lush hinterland villages of Montville and Maleny to the white sands of Noosa and Mooloolaba, this is Nana's guide to the best of the Sunshine Coast — built around family life, school runs, Sunday church, and a whole lot of love.</p>
+</section>
+
+<!-- SCENIC STRIP -->
+<div class="scenic-strip">
+  <div class="scene scene-beach"><span>🏖️</span><span class="scene-label">Mooloolaba Beach</span></div>
+  <div class="scene scene-hinter"><span>🌿</span><span class="scene-label">Hinterland</span></div>
+  <div class="scene scene-wildlife"><span>🦘</span><span class="scene-label">Australia Zoo</span></div>
+  <div class="scene scene-city"><span>🌉</span><span class="scene-label">Brisbane</span></div>
+  <div class="scene scene-market"><span>🛍️</span><span class="scene-label">Eumundi Markets</span></div>
+</div>
+
+<!-- LEGEND -->
+<div class="legend-section">
+  <p class="legend-title">Who's joining in?</p>
+  <div class="legend-pills">
+    <span class="pill pill-family">🌊 Whole Family</span>
+    <span class="pill pill-girls">🌸 Jen, Jordan & Nana</span>
+    <span class="pill pill-jn">☕ Jen & Nana</span>
+    <span class="pill pill-evening">🌙 Evening Activity</span>
+  </div>
+</div>
+
+<!-- WEEK 1 -->
+<div class="week-header w1">
+  <div class="week-header-content">
+    <p class="week-label">Week One</p>
+    <h2 class="week-title">Arrival & Exploring</h2>
+    <div class="week-emoji">☀️ 🦘 🌊</div>
+  </div>
+</div>
+
+<div class="days-container">
+
+  <div class="day-card">
+    <div class="card-art art-arrival"><span class="card-art-emoji">✈️</span></div>
+    <div class="day-number-badge">1</div>
+    <div class="day-card-body">
+      <p class="day-date">Thursday · 21 May</p>
+      <h3 class="day-name">Nana Arrives! 🎉</h3>
+      <p class="day-desc">Nana lands at 5am — early start but worth every minute. Rest up, settle in, soak in that Sunshine Coast air. Jordan works 10–4. Tonight the whole family gathers for a warm welcome dinner at home.</p>
+      <div class="day-tags"><span class="tag tag-family">Whole Family</span><span class="tag tag-evening">Welcome Dinner</span></div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="card-art art-montville"><span class="card-art-emoji">🏡</span></div>
+    <div class="day-number-badge">2</div>
+    <div class="day-card-body">
+      <p class="day-date">Friday · 22 May</p>
+      <h3 class="day-name">Montville Village</h3>
+      <p class="day-desc">Boys at school, Sean working from home. Jen, Jordan and Nana head up into the beautiful hinterland to charming Montville — great coffee, boutiques, sweeping views over the Sunshine Coast. Evening: Friday night markets while the boys are at youth group 6–9pm.</p>
+      <div class="day-tags"><span class="tag tag-girls">Jen, Jordan & Nana</span><span class="tag tag-evening">Friday Night Markets</span></div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="card-art art-zoo"><span class="card-art-emoji">🦘</span></div>
+    <div class="day-number-badge">3</div>
+    <div class="day-card-body">
+      <p class="day-date">Saturday · 23 May</p>
+      <h3 class="day-name">Australia Zoo 🐊</h3>
+      <p class="day-desc">Jordan works but everyone else is in for a full day at Australia Zoo — koalas, crocs, kangaroos and all the Aussie wildlife Nana has been dreaming of. The Irwin family's legendary zoo, right here on the Sunshine Coast.</p>
+      <div class="day-tags"><span class="tag tag-family">Family (excl. Jordan)</span></div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="card-art art-markets"><span class="card-art-emoji">🛒</span></div>
+    <div class="day-number-badge">4</div>
+    <div class="day-card-body">
+      <p class="day-date">Sunday · 24 May</p>
+      <h3 class="day-name">Church & Caloundra Markets</h3>
+      <p class="day-desc">Family church 9–11am. Then straight to the Caloundra markets — whole family strolls through fresh produce, local makers, and ocean views. A classic Sunshine Coast Sunday. Jordan at church 5–8pm.</p>
+      <div class="day-tags"><span class="tag tag-church">Church</span><span class="tag tag-family">Whole Family</span></div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="card-art art-maleny"><span class="card-art-emoji">🌄</span></div>
+    <div class="day-number-badge">5</div>
+    <div class="day-card-body">
+      <p class="day-date">Monday · 25 May</p>
+      <h3 class="day-name">Maleny & the Glass Mountains</h3>
+      <p class="day-desc">Boys at school, Sean working. The girls head to Maleny — stunning Glasshouse Mountains scenery on the way, and a gorgeous hinterland village of boutiques and cafes. Dress shopping mission underway.</p>
+      <div class="day-tags"><span class="tag tag-girls">Jen, Jordan & Nana</span></div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="card-art art-noosa"><span class="card-art-emoji">🌊</span></div>
+    <div class="day-number-badge">6</div>
+    <div class="day-card-body">
+      <p class="day-date">Tuesday · 26 May</p>
+      <h3 class="day-name">Noosa Day Trip</h3>
+      <p class="day-desc">Queensland's most beautiful beach town. Jen, Jordan and Nana spend the day on Hastings Street — world-class food, boutique shopping, and the stunning Noosa Main Beach. A genuine Sunshine Coast highlight.</p>
+      <div class="day-tags"><span class="tag tag-girls">Jen, Jordan & Nana</span></div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="card-art art-eumundi"><span class="card-art-emoji">🎨</span></div>
+    <div class="day-number-badge">7</div>
+    <div class="day-card-body">
+      <p class="day-date">Wednesday · 27 May</p>
+      <h3 class="day-name">Eumundi Markets</h3>
+      <p class="day-desc">One of Queensland's most iconic markets — held Wednesdays and Saturdays in the heritage village of Eumundi. Hundreds of stalls, local artisans, incredible food. Jen, Jordan and Nana make a morning of it. Small group moved to this evening.</p>
+      <div class="day-tags"><span class="tag tag-girls">Jen, Jordan & Nana</span><span class="tag tag-evening">Small Group (eve)</span></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- WEEK 2 -->
+<div class="week-header w2">
+  <div class="week-header-content">
+    <p class="week-label">Week Two</p>
+    <h2 class="week-title">Hinterland & Coast</h2>
+    <div class="week-emoji">🌿 🏙️ 🎵</div>
+  </div>
+</div>
+
+<div class="days-container">
+
+  <div class="day-card">
+    <div class="card-art art-volunteer"><span class="card-art-emoji">💜</span></div>
+    <div class="day-number-badge">8</div>
+    <div class="day-card-body">
+      <p class="day-date">Thursday · 28 May</p>
+      <h3 class="day-name">Sydney — Day One 🌉</h3>
+      <p class="day-desc">Sean and Nana fly out at 7am. Sean heads straight to work while Nana plays tourist in one of the world's great cities. Harbour Bridge, Opera House, The Rocks, Circular Quay — all within walking distance. Darling Harbour worth an afternoon wander. Overnight in Sydney.</p>
+      <div class="day-tags"><span class="tag tag-family">Sean & Nana</span><span class="tag tag-work">Sean Working</span></div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="card-art art-nightmkt"><span class="card-art-emoji">🌙</span></div>
+    <div class="day-number-badge">9</div>
+    <div class="day-card-body">
+      <p class="day-date">Friday · 29 May</p>
+      <h3 class="day-name">Sydney — Day Two & Home ✈️</h3>
+      <p class="day-desc">Nana's second day exploring Sydney while Sean works. Bondi Beach, the Royal Botanic Garden, Manly Ferry, or a stroll through the CBD — the city is her oyster. Sean and Nana fly home together, back on the Sunshine Coast by 5pm. Boys at youth group 6–9pm.</p>
+      <div class="day-tags"><span class="tag tag-family">Sean & Nana</span><span class="tag tag-evening">Home by 5pm</span></div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="card-art art-hike"><span class="card-art-emoji">🌿</span></div>
+    <div class="day-number-badge">10</div>
+    <div class="day-card-body">
+      <p class="day-date">Saturday · 30 May</p>
+      <h3 class="day-name">Kondalilla Falls & Rice Boo Dinner</h3>
+      <p class="day-desc">Jordan works but everyone else laces up for the Kondalilla Falls Circuit in Kondalilla National Park near Montville — 4.6km through subtropical rainforest, 90 metres of cascading falls, and a swimming hole at the top. Allow 2–3 hours. Pack swimmers. Tonight: Rice Boo for a well-earned family dinner.</p>
+      <div class="day-tags"><span class="tag tag-family">Family (excl. Jordan)</span><span class="tag tag-evening">Rice Boo Dinner</span></div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="card-art art-brisbane"><span class="card-art-emoji">🌉</span></div>
+    <div class="day-number-badge">11</div>
+    <div class="day-card-body">
+      <p class="day-date">Sunday · 31 May</p>
+      <h3 class="day-name">Brisbane Family Day Trip</h3>
+      <p class="day-desc">Skipping church today — the whole family heads to Brisbane. South Bank Parklands, the river, Story Bridge views, incredible food. Queensland's capital city putting on a show for Nana. Jordan at church 5–8pm.</p>
+      <div class="day-tags"><span class="tag tag-family">Whole Family</span></div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="card-art art-concert"><span class="card-art-emoji">🎵</span></div>
+    <div class="day-number-badge">12</div>
+    <div class="day-card-body">
+      <p class="day-date">Monday · 1 June</p>
+      <h3 class="day-name">Concert Night 🎶</h3>
+      <p class="day-desc">Boys at school, Sean working. Easy day for Jen and Nana. Tonight, Jen and Sean head out to see Matt Berninger — a date night well-earned. Nana holds the fort at home with the kids.</p>
+      <div class="day-tags"><span class="tag tag-jn">Jen & Nana (day)</span><span class="tag tag-evening">Sean & Jen Out</span></div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="card-art art-marooch"><span class="card-art-emoji">🍜</span></div>
+    <div class="day-number-badge">13</div>
+    <div class="day-card-body">
+      <p class="day-date">Tuesday · 2 June</p>
+      <h3 class="day-name">Maroochydore Esplanade & Dinner</h3>
+      <p class="day-desc">Evening walk along the Maroochydore esplanade as the sun drops — waterfront views, sea breeze, golden hour on the Sunshine Coast. Then dinner out together. A beautiful send-off evening for Nana's final days with us.</p>
+      <div class="day-tags"><span class="tag tag-family">Whole Family</span><span class="tag tag-evening">Bok Dinner</span></div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="card-art art-lastday"><span class="card-art-emoji">🥹</span></div>
+    <div class="day-number-badge">14</div>
+    <div class="day-card-body">
+      <p class="day-date">Wednesday · 3 June</p>
+      <h3 class="day-name">Mary Cairncross Scenic Reserve 🌳</h3>
+      <p class="day-desc">Nana's last full day on the Sunshine Coast. Up to Mary Cairncross Scenic Reserve near Maleny — 55 hectares of subtropical rainforest with panoramic views across all three Glasshouse Mountains. Beautiful walking tracks, incredible birdlife, and a great café on site. A perfect peaceful send-off to the hinterland she's fallen in love with. Jordan's small group tonight.</p>
+      <div class="day-tags"><span class="tag tag-girls">Jen, Jordan & Nana</span></div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="card-art art-farewell"><span class="card-art-emoji">💛</span></div>
+    <div class="day-number-badge">15</div>
+    <div class="day-card-body">
+      <p class="day-date">Thursday · 4 June</p>
+      <h3 class="day-name">Last Day & Farewell 💛</h3>
+      <p class="day-desc">A full last day together — no agenda, just family. Breakfast together, a walk, soak in the last of the Sunshine Coast sunshine. Nana flies home this evening. Two weeks of sunshine, hinterland, markets, wildlife, waterfalls and so much love — memories that will last a lifetime. Safe travels home.</p>
+      <div class="day-tags"><span class="tag tag-family">Whole Family</span><span class="tag tag-evening">Evening Departure</span></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <h2 class="footer-title">We love you, Nana</h2>
+  <p class="footer-text">Two weeks on Australia's most beautiful coastline, surrounded by the people who love you most. Welcome to our little corner of the Sunshine Coast.</p>
+  <div class="footer-emoji">🦘 ☀️ 🌊 🌿 💛</div>
+</footer>
+
+</body>
+</html>
